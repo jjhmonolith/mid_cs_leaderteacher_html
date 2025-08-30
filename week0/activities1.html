@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연수 일정 (1-4주) - 코들 선도교사</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 1600px;
+            height: 1000px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            padding: 35px 60px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 30px 40px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .principle-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 280px;
+            flex-shrink: 0;
+        }
+        
+        .principle-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+        }
+        
+        .principle-icon {
+            font-size: 28px;
+            width: 50px;
+            text-align: center;
+        }
+        
+        .principle-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1976D2;
+            margin-bottom: 3px;
+        }
+        
+        .principle-desc {
+            font-size: 15px;
+            color: #5e92f3;
+        }
+        
+        .schedule-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .week-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .week-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #3E88FF 0%, #5B9AFF 100%);
+        }
+        
+        .week-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(62, 136, 255, 0.15);
+            border-color: #3E88FF;
+        }
+        
+        .week-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .week-number {
+            background: linear-gradient(135deg, #3E88FF 0%, #5B9AFF 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            font-weight: 700;
+        }
+        
+        .week-title {
+            flex: 1;
+        }
+        
+        .week-name {
+            font-size: 21px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .week-goal {
+            font-size: 15px;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+        
+        .schedule-info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        
+        .info-icon {
+            width: 24px;
+            margin-right: 10px;
+            color: #3E88FF;
+        }
+        
+        .info-text {
+            flex: 1;
+            color: #495057;
+            font-size: 17px;
+        }
+        
+        .info-highlight {
+            color: #3E88FF;
+            font-weight: 500;
+            font-size: 17px;
+        }
+        
+        .activity-section {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            padding: 8px 0;
+            font-size: 15px;
+            color: #495057;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .activity-bullet {
+            color: #3E88FF;
+            margin-right: 8px;
+            margin-top: 2px;
+        }
+        
+        .submit-box {
+            background: linear-gradient(135deg, #fff9db 0%, #ffe8cc 100%);
+            border: 1px solid #FFD700;
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-top: 15px;
+            font-size: 17px;
+            color: #856404;
+        }
+        
+        .logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 35px;
+        }
+        
+        @media (max-width: 1400px) {
+            .container {
+                transform: scale(0.9);
+            }
+        }
+        
+        @media (max-width: 1250px) {
+            .container {
+                transform: scale(0.8);
+            }
+        }
+        
+        @media (max-width: 1100px) {
+            .container {
+                transform: scale(0.7);
+            }
+        }
+    </style>
+    <script src="korean-typing.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1 class="page-title">집중 연수 프로그램 (1-4주차)</h1>
+            </div>
+            <div style="display: flex; align-items: center; gap: 30px;">
+                <img src="코들 캐릭터 png 모음/코들 캐릭터-11.png" alt="코들 캐릭터" style="width: 60px; height: 60px; object-fit: contain;">
+                <div class="logos">
+                    <img src="codle-logo.svg" alt="코들" class="logo">
+                </div>
+            </div>
+        </header>
+        
+        <div class="content-area">
+            <div class="principle-section">
+                <h3 style="font-size: 20px; font-weight: 600; color: #1976D2; margin-bottom: 15px;">📌 핵심 원칙</h3>
+                <div class="principle-item">
+                    <div class="principle-icon">⏱️</div>
+                    <div>
+                        <div class="principle-title">15-30분</div>
+                        <div class="principle-desc">간단한 미션</div>
+                    </div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-icon">📝</div>
+                    <div>
+                        <div class="principle-title">매주 제출</div>
+                        <div class="principle-desc">다양한 형태</div>
+                    </div>
+                </div>
+                <div class="principle-item">
+                    <div class="principle-icon">🎯</div>
+                    <div>
+                        <div class="principle-title">즉시 피드백</div>
+                        <div class="principle-desc">배지·포인트 제공</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="schedule-container">
+                <div class="schedule-grid">
+                <div class="week-card">
+                    <div class="week-header">
+                        <div class="week-number">1주</div>
+                        <div class="week-title">
+                            <div class="week-name">코들 사용법 연수</div>
+                            <div class="week-goal">코들 기본 사용 익히기</div>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-info">
+                        <div class="info-row">
+                            <span class="info-icon">📅</span>
+                            <span class="info-text">9/3(수) 또는 9/4(목) <span class="info-highlight">택1</span></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">⏰</span>
+                            <span class="info-text">16:30 - 17:30 (1시간)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="submit-box">
+                        ✅ 제출: 활동지 + 퀴즈 결과
+                    </div>
+                </div>
+                
+                <div class="week-card">
+                    <div class="week-header">
+                        <div class="week-number">2주</div>
+                        <div class="week-title">
+                            <div class="week-name">활동지/퀴즈로 보는 학생 평가</div>
+                            <div class="week-goal">활동지/퀴즈 기반 평가 흐름 익히기</div>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-info">
+                        <div class="info-row">
+                            <span class="info-icon">📅</span>
+                            <span class="info-text">9/10(수) 또는 9/11(목) <span class="info-highlight">택1</span></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">⏰</span>
+                            <span class="info-text">16:30 - 17:30 (1시간)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="submit-box">
+                        ✅ 제출: 들어가기·마치기 퀴즈 결과
+                    </div>
+                </div>
+                
+                <div class="week-card">
+                    <div class="week-header">
+                        <div class="week-number">3주</div>
+                        <div class="week-title">
+                            <div class="week-name">엔트리 활동을 활용한 수업 설계</div>
+                            <div class="week-goal">엔트리 활동 2종으로 한 차시 수업 구성</div>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-info">
+                        <div class="info-row">
+                            <span class="info-icon">📅</span>
+                            <span class="info-text">9/17(수) 또는 9/18(목) <span class="info-highlight">택1</span></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">⏰</span>
+                            <span class="info-text">16:30 - 17:30 (1시간)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="submit-box">
+                        ✅ 제출: 마치기 퀴즈 결과
+                    </div>
+                </div>
+                
+                <div class="week-card">
+                    <div class="week-header">
+                        <div class="week-number">4주</div>
+                        <div class="week-title">
+                            <div class="week-name">보완 세션 (추가 참석 기회)</div>
+                            <div class="week-goal">놓친 내용 보충 및 심화 학습</div>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-info">
+                        <div class="info-row">
+                            <span class="info-icon">📅</span>
+                            <span class="info-text">9/29(월), 9/30(화), 10/2(목) <span class="info-highlight">택1</span></span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-icon">⏰</span>
+                            <span class="info-text">16:30 - 17:30 (1시간)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-section">
+                        <div style="background: #e8f5e9; border-radius: 12px; padding: 15px;">
+                            <div class="activity-title" style="color: #2e7d32;">🎁 특별 혜택</div>
+                            <p style="font-size: 15px; color: #388e3c; line-height: 1.5;">
+                                주1·2·3 모두 참석한 선생님께 커피 쿠폰 제공<br>
+                                심화 내용 및 Q&A 세션
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 한글 타이핑 효과
+        const pageTitle = document.querySelector('.page-title');
+        const titleText = pageTitle.textContent;
+        pageTitle.textContent = '';
+        
+        setTimeout(() => {
+            koreanTyping.type(pageTitle, titleText, 60);
+        }, 300);
+        
+        // 카드 순차 애니메이션
+        const cards = document.querySelectorAll('.week-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease-out';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300 + (index * 100));
+        });
+    </script>
+</body>
+</html>

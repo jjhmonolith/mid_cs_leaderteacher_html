@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공모전 및 마무리 (9-12주) - 코들 선도교사</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 1600px;
+            height: 1000px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            padding: 35px 60px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 30px 40px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .side-panel {
+            width: 280px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .program-info {
+            background: linear-gradient(135deg, #fff4e6 0%, #ffe0b2 100%);
+            border-radius: 20px;
+            padding: 20px;
+        }
+        
+        .program-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #E65100;
+            margin-bottom: 10px;
+        }
+        
+        .program-desc {
+            font-size: 17px;
+            color: #FF6F00;
+            line-height: 1.5;
+        }
+        
+        .main-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stage-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .stage-section {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .stage-header {
+            padding: 15px 20px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .stage-header.final {
+            
+        }
+        
+        .stage-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .stage-subtitle {
+            font-size: 17px;
+            color: #7f8c8d;
+        }
+        
+        .week-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .week-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #FF6F00 0%, #FF9800 100%);
+        }
+        
+        .week-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 111, 0, 0.15);
+            border-color: #FF6F00;
+        }
+        
+        .week-card.competition {
+            border-color: #e0e0e0;
+            background: white;
+        }
+        
+        .week-card.final {
+            border-color: #e0e0e0;
+            background: white;
+        }
+        
+        .week-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .week-badge {
+            background: linear-gradient(135deg, #FF6F00 0%, #FF9800 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .week-info {
+            flex: 1;
+        }
+        
+        .week-name {
+            font-size: 21px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .week-desc {
+            font-size: 15px;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+        
+        .week-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        
+        .activity-section {
+            flex: 1;
+        }
+        
+        .activity-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        
+        .activity-label {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            padding: 10px 0;
+            font-size: 16px;
+            color: #495057;
+            display: flex;
+            align-items: flex-start;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-bullet {
+            color: #FF6F00;
+            margin-right: 8px;
+            margin-top: 2px;
+            font-weight: 600;
+        }
+        
+        .tbd-note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 6px 10px;
+            margin-top: 8px;
+            font-size: 17px;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .special-note {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 8px;
+            text-align: center;
+        }
+        
+        .special-note-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+        
+        .special-note-desc {
+            font-size: 17px;
+            color: #388e3c;
+            line-height: 1.4;
+        }
+        
+        .logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 35px;
+        }
+        
+        @media (max-width: 1400px) {
+            .container {
+                transform: scale(0.9);
+            }
+        }
+        
+        @media (max-width: 1250px) {
+            .container {
+                transform: scale(0.8);
+            }
+        }
+        
+        @media (max-width: 1100px) {
+            .container {
+                transform: scale(0.7);
+            }
+        }
+    </style>
+    <script src="korean-typing.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1 class="page-title">공모전 및 마무리 (9-12주차)</h1>
+            </div>
+            <div style="display: flex; align-items: center; gap: 30px;">
+                <img src="코들 캐릭터 png 모음/코들 캐릭터-23.png" alt="코들 캐릭터" style="width: 60px; height: 60px; object-fit: contain;">
+                <div class="logos">
+                    <img src="codle-logo.svg" alt="코들" class="logo">
+                </div>
+            </div>
+        </header>
+        
+        <div class="content-area">
+            <div class="side-panel">
+                <div class="program-info">
+                    <div class="program-title">🏆 공모전 & 마무리</div>
+                    <div class="program-desc">창의적인 수업자료 제작과 경험 공유로 마무리합니다</div>
+                </div>
+                <div style="background: white; border-radius: 12px; padding: 15px; border: 2px solid #FF9800;">
+                    <h4 style="font-size: 17px; font-weight: 600; color: #E65100; margin-bottom: 12px;">🌟 하이라이트</h4>
+                    <ul style="list-style: none; font-size: 15px; color: #FF6F00; line-height: 1.8;">
+                        <li>• 9주: 작품 제작</li>
+                        <li>• 10주: 투표 진행</li>
+                        <li>• 11주: 우수작 공유</li>
+                        <li>• 12주: 성과 축하</li>
+                    </ul>
+                </div>
+                <div style="background: #e8f5e9; border-radius: 12px; padding: 15px;">
+                    <h4 style="font-size: 17px; font-weight: 600; color: #2e7d32; margin-bottom: 10px;">🎁 특별 혜택</h4>
+                    <p style="font-size: 15px; color: #388e3c; line-height: 1.5;">우수 작품은 코들을 통해 전국의 선생님들과 공유됩니다</p>
+                </div>
+            </div>
+            
+            <div class="main-area">
+                <div class="stage-container">
+                    <!-- 공모전 단계 (9-10주) -->
+                    <div class="stage-section">
+                        <div class="week-card competition">
+                            <div class="week-content">
+                                <div class="week-header">
+                                    <div class="week-badge">9주</div>
+                                    <div class="week-info">
+                                        <div class="week-name">공모전 출전용 수업자료 제작·제출</div>
+                                        <div class="week-desc">파이썬/엔트리/코들 연수 연계 수업자료 출품</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-section">
+                                    <div class="activity-box">
+                                        <div class="activity-label">
+                                            <span>📝</span>
+                                            <span>미션 내용</span>
+                                        </div>
+                                        <ul class="activity-list">
+                                            <li class="activity-item">
+                                                <span class="activity-bullet">1.</span>
+                                                <span>본인 제작 수업자료 완성</span>
+                                            </li>
+                                            <li class="activity-item">
+                                                <span class="activity-bullet">2.</span>
+                                                <span>공모전 규정에 맞춰 제출</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="week-card competition">
+                            <div class="week-content">
+                                <div class="week-header">
+                                    <div class="week-badge">10주</div>
+                                    <div class="week-info">
+                                        <div class="week-name">공모전 작품 투표</div>
+                                        <div class="week-desc">동료 작품 살펴보고 투표 참여</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-section">
+                                    <div class="activity-box">
+                                        <div class="activity-label">
+                                            <span>🗳️</span>
+                                            <span>진행 방식</span>
+                                        </div>
+                                        <ul class="activity-list">
+                                            <li class="activity-item">
+                                                <span class="activity-bullet">1.</span>
+                                                <span>출품작을 한 교실에 배부</span>
+                                            </li>
+                                            <li class="activity-item">
+                                                <span class="activity-bullet">2.</span>
+                                                <span>교사 투표로 순위 확정</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 마무리 단계 (11-12주) -->
+                    <div class="stage-section">
+                        <div class="week-card final">
+                            <div class="week-content">
+                                <div class="week-header">
+                                    <div class="week-badge">11주</div>
+                                    <div class="week-info">
+                                        <div class="week-name">입상작 라이브러리 업로드 & 홍보</div>
+                                        <div class="week-desc">우수 콘텐츠 확산</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-section">
+                                    <div class="activity-box">
+                                        <div class="activity-label">
+                                            <span>📚</span>
+                                            <span>진행 내용</span>
+                                        </div>
+                                        <ul class="activity-list">
+                                            <li class="activity-item">
+                                                <span class="activity-bullet">1.</span>
+                                                <span>입상작 라이브러리 업로드</span>
+                                            </li>
+                                            <li class="activity-item">
+                                                <span class="activity-bullet">2.</span>
+                                                <span>채널톡 홍보 진행</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="week-card final">
+                            <div class="week-content">
+                                <div class="week-header">
+                                    <div class="week-badge">12주</div>
+                                    <div class="week-info">
+                                        <div class="week-name">마무리</div>
+                                        <div class="week-desc">운영 회고 및 완주 축하</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="activity-section">
+                                    <div class="activity-box">
+                                        <div class="activity-label">
+                                            <span>🎉</span>
+                                            <span>진행 내용</span>
+                                        </div>
+                                        <ul class="activity-list">
+                                            <li class="activity-item">
+                                                <span class="activity-bullet">1.</span>
+                                                <span>마무리 세션 진행</span>
+                                            </li>
+                                            <li class="activity-item">
+                                                <span class="activity-bullet">2.</span>
+                                                <span>선도교사 인증 안내</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="special-note">
+                                    <div class="special-note-title">🎊 특별 이벤트</div>
+                                    <div class="special-note-desc">
+                                        방학 중 성과공유회 예정
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 한글 타이핑 효과
+        const pageTitle = document.querySelector('.page-title');
+        const titleText = pageTitle.textContent;
+        pageTitle.textContent = '';
+        
+        setTimeout(() => {
+            koreanTyping.type(pageTitle, titleText, 60);
+        }, 300);
+        
+        // 카드 순차 애니메이션
+        const cards = document.querySelectorAll('.week-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(-20px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease-out';
+                card.style.opacity = '1';
+                card.style.transform = 'translateX(0)';
+            }, 300 + (index * 150));
+        });
+        
+        // 스테이지 헤더 애니메이션
+        const headers = document.querySelectorAll('.stage-header');
+        headers.forEach((header, index) => {
+            header.style.opacity = '0';
+            header.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                header.style.transition = 'all 0.6s ease-out';
+                header.style.opacity = '1';
+                header.style.transform = 'translateY(0)';
+            }, 200 + (index * 100));
+        });
+    </script>
+</body>
+</html>

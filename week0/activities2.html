@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습 및 콘텐츠 제작 (5-8주) - 코들 선도교사</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 1600px;
+            height: 1000px;
+            background: white;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            padding: 35px 60px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        
+        .content-area {
+            flex: 1;
+            padding: 30px 40px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .side-section {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 280px;
+            flex-shrink: 0;
+        }
+        
+        .side-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 12px;
+        }
+        
+        .side-icon {
+            font-size: 28px;
+            width: 50px;
+            text-align: center;
+        }
+        
+        .side-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #6A1B9A;
+            margin-bottom: 3px;
+        }
+        
+        .side-desc {
+            font-size: 15px;
+            color: #8E24AA;
+        }
+        
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .week-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .week-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #9C27B0 0%, #BA68C8 100%);
+        }
+        
+        .week-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(156, 39, 176, 0.15);
+            border-color: #9C27B0;
+        }
+        
+        .week-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .week-number {
+            background: linear-gradient(135deg, #9C27B0 0%, #BA68C8 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .week-info {
+            flex: 1;
+        }
+        
+        .week-name {
+            font-size: 21px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .week-goal {
+            font-size: 15px;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+        
+        .mission-section {
+            flex: 1;
+        }
+        
+        .mission-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        
+        .mission-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mission-list {
+            list-style: none;
+        }
+        
+        .mission-item {
+            padding: 10px 0;
+            font-size: 16px;
+            color: #495057;
+            display: flex;
+            align-items: flex-start;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .mission-item:last-child {
+            border-bottom: none;
+        }
+        
+        .mission-bullet {
+            color: #9C27B0;
+            margin-right: 8px;
+            margin-top: 2px;
+            font-weight: 600;
+        }
+        
+        .logos {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 35px;
+        }
+        
+        @media (max-width: 1400px) {
+            .container {
+                transform: scale(0.9);
+            }
+        }
+        
+        @media (max-width: 1250px) {
+            .container {
+                transform: scale(0.8);
+            }
+        }
+        
+        @media (max-width: 1100px) {
+            .container {
+                transform: scale(0.7);
+            }
+        }
+    </style>
+    <script src="korean-typing.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div>
+                <h1 class="page-title">실습 및 콘텐츠 제작 (5-8주차)</h1>
+            </div>
+            <div style="display: flex; align-items: center; gap: 30px;">
+                <img src="코들 캐릭터 png 모음/코들 캐릭터-17.png" alt="코들 캐릭터" style="width: 60px; height: 60px; object-fit: contain;">
+                <div class="logos">
+                    <img src="codle-logo.svg" alt="코들" class="logo">
+                </div>
+            </div>
+        </header>
+        
+        <div class="content-area">
+            <div class="side-section">
+                <h3 style="font-size: 20px; font-weight: 600; color: #6A1B9A; margin-bottom: 15px;">🚀 본격 실습 단계</h3>
+                <p style="font-size: 15px; color: #8E24AA; line-height: 1.5; margin-bottom: 15px;">배운 내용을 직접 활용하고 나만의 콘텐츠를 만들어보세요</p>
+                
+                <div style="background: white; border-radius: 12px; padding: 15px;">
+                    <h4 style="font-size: 17px; font-weight: 600; color: #6A1B9A; margin-bottom: 12px;">💡 주차별 포인트</h4>
+                    <ul style="list-style: none; font-size: 15px; color: #8E24AA; line-height: 1.8;">
+                        <li>• 5-6주: 기본 기능 활용</li>
+                        <li>• 7-8주: 콘텐츠 제작</li>
+                        <li>• 실제 수업 적용</li>
+                        <li>• 창의적 활용법</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="main-container">
+                <div class="weeks-grid">
+                    <div class="week-card">
+                        <div class="week-header">
+                            <div class="week-number">5주</div>
+                            <div class="week-info">
+                                <div class="week-name">평가 활동 제작해보기</div>
+                                <div class="week-goal">연수 내용과 연결된 활동지/엔트리/퀴즈 중 1종 제작</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mission-section">
+                            <div class="mission-box">
+                                <div class="mission-title">
+                                    <span>📝</span>
+                                    <span>미션 내용</span>
+                                </div>
+                                <ul class="mission-list">
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">1.</span>
+                                        <span>코들에서 새 수업자료 생성</span>
+                                    </li>
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">2.</span>
+                                        <span>활동 1개 완성 (활동지/엔트리/퀴즈 택1)</span>
+                                    </li>
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">3.</span>
+                                        <span>보드 또는 활동지에 공유 링크 제출</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card">
+                        <div class="week-header">
+                            <div class="week-number">6주</div>
+                            <div class="week-info">
+                                <div class="week-name">코들 제공 활동 깊게 살피기</div>
+                                <div class="week-goal">활동 카탈로그 탐색 및 개선 제안</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mission-section">
+                            <div class="mission-box">
+                                <div class="mission-title">
+                                    <span>🔍</span>
+                                    <span>미션 내용</span>
+                                </div>
+                                <ul class="mission-list">
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">1.</span>
+                                        <span>활동1: 각 활동의 활용처/개발 목적 등 질문 리스트 작성</span>
+                                    </li>
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">2.</span>
+                                        <span>활동2: 사용 중 불편사항·개선점 피드백 남기기</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card">
+                        <div class="week-header">
+                            <div class="week-number">7주</div>
+                            <div class="week-info">
+                                <div class="week-name">9월 신규 수업자료로 구성해보기</div>
+                                <div class="week-goal">9월에 업데이트된 신규 자료로 차시 구성</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mission-section">
+                            <div class="mission-box">
+                                <div class="mission-title">
+                                    <span>📚</span>
+                                    <span>미션 내용</span>
+                                </div>
+                                <ul class="mission-list">
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">1.</span>
+                                        <span>신규 자료 1종을 선정</span>
+                                    </li>
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">2.</span>
+                                        <span>자신의 맥락에 맞게 차시 구성안 작성</span>
+                                    </li>
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">3.</span>
+                                        <span>구성안 업로드</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="week-card">
+                        <div class="week-header">
+                            <div class="week-number">8주</div>
+                            <div class="week-info">
+                                <div class="week-name">나만의 시리즈 만들기</div>
+                                <div class="week-goal">코들 오리지널 자료(또는 직접 제작)로 연계 시리즈 설계</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mission-section">
+                            <div class="mission-box">
+                                <div class="mission-title">
+                                    <span>🎯</span>
+                                    <span>미션 내용</span>
+                                </div>
+                                <ul class="mission-list">
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">1.</span>
+                                        <span>2-3차시 이상 묶음 구성</span>
+                                    </li>
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">2.</span>
+                                        <span>시퀀스·평가 포인트 명시</span>
+                                    </li>
+                                    <li class="mission-item">
+                                        <span class="mission-bullet">3.</span>
+                                        <span>시리즈 개요 및 각 차시 링크 제출</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 한글 타이핑 효과
+        const pageTitle = document.querySelector('.page-title');
+        const titleText = pageTitle.textContent;
+        pageTitle.textContent = '';
+        
+        setTimeout(() => {
+            koreanTyping.type(pageTitle, titleText, 60);
+        }, 300);
+        
+        // 카드 순차 애니메이션
+        const cards = document.querySelectorAll('.week-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease-out';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 300 + (index * 100));
+        });
+    </script>
+</body>
+</html>
