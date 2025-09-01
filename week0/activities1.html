@@ -444,35 +444,17 @@
             }, 300);
         }
         
-        // 사이드 패널 애니메이션
-        const sidePanel = document.querySelector('.side-panel');
-        if (sidePanel) {
-            const sidePanelElements = sidePanel.children;
-            console.log('Side panel elements:', sidePanelElements.length);
-            
-            Array.from(sidePanelElements).forEach((element, index) => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateX(-30px)';
-                setTimeout(() => {
-                    element.style.transition = 'all 0.6s ease-out';
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateX(0)';
-                }, 100 + (index * 100));
-            });
-        }
-        
-        // 원칙 아이템 애니메이션
-        const principleItems = document.querySelectorAll('.principle-item');
-        console.log('Principle items found:', principleItems.length);
-        principleItems.forEach((item, index) => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(-10px)';
+        // 원칙 섹션 전체 애니메이션
+        const principleSection = document.querySelector('.principle-section');
+        if (principleSection) {
+            principleSection.style.opacity = '0';
+            principleSection.style.transform = 'translateX(-30px)';
             setTimeout(() => {
-                item.style.transition = 'all 0.5s ease-out';
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, 200 + (index * 100));
-        });
+                principleSection.style.transition = 'all 0.6s ease-out';
+                principleSection.style.opacity = '1';
+                principleSection.style.transform = 'translateX(0)';
+            }, 200);
+        }
         
         // 카드 순차 애니메이션
         const cards = document.querySelectorAll('.week-card');
