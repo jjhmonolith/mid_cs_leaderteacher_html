@@ -275,7 +275,7 @@
             }
         }
     </style>
-    <script src="korean-typing.js"></script>
+    <script src="korean-typing.js?v=2"></script>
 </head>
 <body>
     <div class="container">
@@ -430,25 +430,61 @@
     </div>
     
     <script>
+        // 페이지 로드 확인
+        console.log('Activities1 script loaded');
+        
         // 한글 타이핑 효과
         const pageTitle = document.querySelector('.page-title');
-        const titleText = pageTitle.textContent;
-        pageTitle.textContent = '';
+        if (pageTitle) {
+            const titleText = pageTitle.textContent;
+            pageTitle.textContent = '';
+            
+            setTimeout(() => {
+                koreanTyping.type(pageTitle, titleText, 60);
+            }, 300);
+        }
         
-        setTimeout(() => {
-            koreanTyping.type(pageTitle, titleText, 60);
-        }, 300);
+        // 사이드 패널 애니메이션
+        const sidePanel = document.querySelector('.side-panel');
+        if (sidePanel) {
+            const sidePanelElements = sidePanel.children;
+            console.log('Side panel elements:', sidePanelElements.length);
+            
+            Array.from(sidePanelElements).forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateX(-30px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease-out';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateX(0)';
+                }, 100 + (index * 100));
+            });
+        }
+        
+        // 원칙 아이템 애니메이션
+        const principleItems = document.querySelectorAll('.principle-item');
+        console.log('Principle items found:', principleItems.length);
+        principleItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(-10px)';
+            setTimeout(() => {
+                item.style.transition = 'all 0.5s ease-out';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 200 + (index * 100));
+        });
         
         // 카드 순차 애니메이션
         const cards = document.querySelectorAll('.week-card');
+        console.log('Week cards found:', cards.length);
         cards.forEach((card, index) => {
             card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
+            card.style.transform = 'translateX(-20px)';
             setTimeout(() => {
                 card.style.transition = 'all 0.5s ease-out';
                 card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 300 + (index * 100));
+                card.style.transform = 'translateX(0)';
+            }, 400 + (index * 150));
         });
     </script>
 </body>

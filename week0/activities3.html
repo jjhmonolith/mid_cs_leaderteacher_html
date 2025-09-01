@@ -344,8 +344,8 @@
                     <h4 style="font-size: 17px; font-weight: 600; color: #E65100; margin-bottom: 12px;">🌟 하이라이트</h4>
                     <ul style="list-style: none; font-size: 15px; color: #FF6F00; line-height: 1.8;">
                         <li>• 9주: 작품 제작</li>
-                        <li>• 10주: 투표 진행</li>
-                        <li>• 11주: 우수작 공유</li>
+                        <li>• 10주: 우수작 공유</li>
+                        <li>• 11주: 투표 진행</li>
                         <li>• 12주: 성과 축하</li>
                     </ul>
                 </div>
@@ -394,7 +394,7 @@
                         <div class="week-card competition">
                             <div class="week-content">
                                 <div class="week-header">
-                                    <div class="week-badge">10주</div>
+                                    <div class="week-badge">11주</div>
                                     <div class="week-info">
                                         <div class="week-name">공모전 작품 투표</div>
                                         <div class="week-desc">동료 작품 살펴보고 투표 참여</div>
@@ -424,12 +424,12 @@
                         </div>
                     </div>
                     
-                    <!-- 마무리 단계 (11-12주) -->
+                    <!-- 마무리 단계 (10,12주) -->
                     <div class="stage-section">
                         <div class="week-card final">
                             <div class="week-content">
                                 <div class="week-header">
-                                    <div class="week-badge">11주</div>
+                                    <div class="week-badge">10주</div>
                                     <div class="week-info">
                                         <div class="week-name">입상작 라이브러리 업로드 & 홍보</div>
                                         <div class="week-desc">우수 콘텐츠 확산</div>
@@ -510,6 +510,20 @@
         setTimeout(() => {
             koreanTyping.type(pageTitle, titleText, 60);
         }, 300);
+        
+        // 사이드 패널 애니메이션
+        const sidePanel = document.querySelector('.side-panel');
+        const sidePanelElements = sidePanel.children;
+        
+        Array.from(sidePanelElements).forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateX(-30px)';
+            setTimeout(() => {
+                element.style.transition = 'all 0.6s ease-out';
+                element.style.opacity = '1';
+                element.style.transform = 'translateX(0)';
+            }, 100 + (index * 100));
+        });
         
         // 카드 순차 애니메이션
         const cards = document.querySelectorAll('.week-card');
